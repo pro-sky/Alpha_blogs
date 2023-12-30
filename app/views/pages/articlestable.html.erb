@@ -1,0 +1,45 @@
+<h3 class="text-center mt-3">Listing article in table form</h3>
+
+
+<table id="myTable" class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Created By</th>
+      <th>Created Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each_with_index do |blog,index| %>
+      <tr>
+        <td><%= @articles.offset + index + 1 %></td>
+        <td><%= blog.title %></td>
+        <td><%= blog.user.username %></td>
+        <td><%= time_ago_in_words(blog.created_at )%> ago</td>
+        <td>
+          <%= link_to 'View', article_path(blog) %>
+          <% if logged_in? && (blog.user == current_user || current_user.admin?) %>
+          <%= link_to 'Edit', edit_article_path(blog) %>
+          <%= link_to 'Delete', article_path(blog), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+
+
+<div class=" text-center mb-4 flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+</div>
+
+<script>
+document.addEventListener('turbolinks:load', function() {
+  $('#myTable').DataTable();
+});
+
+  
+</script>

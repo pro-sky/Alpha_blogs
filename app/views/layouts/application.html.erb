@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AlphaBlog</title>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+     
+     <%= javascript_include_tag 'application' %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   
+  </head>
+
+  <body>
+     
+    <%= render 'layouts/navigation' %>
+    <div class="container">
+     <% flash.each do |name, msg| %>
+      <div class="alert <%= bootstrap_alert_class(name) %> alert-dismissible fade show" role="alert"> 
+     <%= msg %> 
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+     </div>
+     <% end %>
+     </div>
+
+    <%= yield %>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  </body>
+</html>
