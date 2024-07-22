@@ -1,24 +1,53 @@
 # README
+#Software required
+ * Ruby - 2.3.8
+ * Rails - 5.1.7
+ * Postgress
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Features
 
-Things you may want to cover:
+- User authentication and authorization
+- Create, edit, delete, and view blog posts
+- Create comment on post and add like on comment and post.
+- Responsive design using Bootstrap 4
+- PostgreSQL database for storing blog posts and user information
 
-* Ruby version
+# Checkout the repository by running command on terminal
 
-* System dependencies
+```sh
+$ git clone https://github.com/pro-sky/Alpha_blogs.git
+```
+# Run the below Tasks under project directory on terminal
 
-* Configuration
+##Change directory
+```sh
+$ cd Alpha_blogs
+```
 
-* Database creation
+##Installing Dependencies
+```sh
+$ bundle install
+```
 
-* Database initialization
+#configuration settings for accessing database
+ * Open database.yml file (in config folder)
+ # Update following points:
+  * database (Database name)
+  * username (Database username)
+  * password (Database password)
+  * host (default value - localhost)
+  * port (default value - 5432)
 
-* How to run the test suite
+##add .env file to project directory and update with below environment variables.
 
-* Services (job queues, cache servers, search engines, etc.)
+    DATABASE_URL
 
-* Deployment instructions
+##Creating database, running seed and migrating tables.
 
-* ...
+```sh
+$ rake db:create
+```
+
+```sh
+$ rake db:migrate
+```
