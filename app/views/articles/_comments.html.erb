@@ -1,0 +1,45 @@
+<div class="card mt-4 shadow mb-5 bg-white rounded">
+    <div class="card-body bg-secondary">
+        <h5 class="card-title">Comments</h5>
+        <% @article.comments.each do |comment| %>
+            <div class="card mb-3">
+                <div class="card-body pb-0">
+                    <div class="media">
+                        <div class="media-body">
+                            <h6 class="mt-0 font-weight-bold"><%= comment.user.username %></h6>
+                            <p><%= comment.content %></p>
+                            <div class="d-flex">
+                                <% if comment.user == current_user || current_user.admin? %>
+                                <%= link_to article_comment_path(@article, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "mr-2" do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                <% end %>
+                                <% end %>
+                                <% if comment.reactions.where(user: current_user).exists? %>
+                                    <%= link_to comment_reaction_path(comment, comment.reactions.find_by(user: current_user)), method: :delete, class: "" do %>
+                                        <%= image_tag 'thumb_down.svg', width: '20px', height: '20px', alt: 'Unlike' %>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to comment_reactions_path(comment), method: :post, class: "" do %>
+                                        <%= image_tag 'thumb_up.svg', width: '20px', height: '20px', alt: 'like' %>
+                                    <% end %>
+                                <% end %>
+                                <span class="ml-2">:<%= comment.like_count %></span>
+                                <small class="text-muted ml-auto "><%= time_ago_in_words(comment.created_at) %> ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <% if current_user %>
+            <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+            <div class="form-group">
+                <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "Add a comment..." %>
+            </div>
+            <%= form.submit "Post Comment", class: "btn btn-primary" %>
+            <% end %>
+        <% else %>
+            <p>Please <%= link_to 'log in', new_user_session_path %> to post a comment.</p>
+        <% end %>
+    </div>
+</div>
