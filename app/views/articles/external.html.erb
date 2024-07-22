@@ -1,0 +1,10 @@
+<h1>External Articles</h1>
+
+   <ul>
+     <% @external_articles.each do |article| %>
+       <li>
+         <h3><%= article['title'] %></h3>
+         <p><%= article['body'] %></p>
+       </li>
+     <% end %>
+   </ul>

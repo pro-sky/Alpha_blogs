@@ -1,5 +1,14 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]
+  include CanCan::ControllerAdditions
+  before_action :set_ability
+
+  private
+
+  def set_ability
+    @ability = Ability.new(current_user)
+  end
+
+  # before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]
   helper_method :current_user, :logged_in?
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -20,10 +29,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate_user!
-    unless current_user
-    flash[:alert] = "You must be signed in to access this page."
-    redirect_to login_path
-    end
-  end
+  # def authenticate_user!
+  #   unless current_user
+  #   flash[:alert] = "You must be signed in to access this page."
+  #   redirect_to login_path
+  #   end
+  # end
 end

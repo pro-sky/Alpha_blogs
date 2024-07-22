@@ -1,7 +1,14 @@
-@import 'bootstrap';
+
 
 #home-container{
     margin-top: 25px;
+}
+
+.move-up {
+  position: relative;
+  top: -50px;
+  z-index: 100;
+  margin-right: 0 !important;
 }
 
 .jumbotron{

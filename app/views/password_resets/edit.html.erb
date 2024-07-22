@@ -1,0 +1,11 @@
+<h1>Password Reset</h1>
+<%= form_with model: @user, url: edit_password_reset_path(@user,reset_token:@user.reset_token), method: :patch do |form| %>
+  <!-- Your password reset form fields here -->
+  <div class="form-group row">
+     <%= form.label :password,class: "col-2 col-form-label text-light" %>
+     <div class="col-10">
+     <%= form.password_field :password,class: "form-control shadow rounded", placeholder: "Create a password" %> 
+     </div>
+    </div>
+  <%= form.submit "Reset Password" %>
+<% end %>

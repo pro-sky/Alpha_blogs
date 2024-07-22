@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-    before_action :require_same_user, only: [:edit, :update, :destroy]
+    # load_and_authorize_resource
+    before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]
+    # before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :require_user, only: [:edit, :update]
+    before_action :authorize_admin!, only: [:userlist]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
    
     def show
@@ -8,6 +12,10 @@ class UsersController < ApplicationController
     
     def index
         @users = User.paginate(page: params[:page], per_page: 3)
+    end
+
+    def userlist
+        @users = User.paginate(page: params[:page], per_page: 5)
     end
 
     def new 
@@ -65,5 +73,20 @@ class UsersController < ApplicationController
         end
     end
 
+    def authenticate_user!
+          unless current_user
+          flash[:alert] = "You must be signed in to access this page."
+          redirect_to login_path
+          end
+        end
+    
+        def authorize_admin!
+            unless current_user.admin?
+              flash[:alert] = "You are not authorized to view this page,only admin can view this."
+              redirect_to root_path
+              # or you might want to render a 403 forbidden status
+              # render file: "#{Rails.root}/public/403.html", status: :forbidden
+            end
+          end
 
 end
