@@ -6,6 +6,8 @@ $(document).ready(function () {
         "italic",
         "link",
         "underline",
+        "undo",
+        "redo",
         "bulletedList",
         "numberedList",
         "|",
