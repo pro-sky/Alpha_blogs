@@ -19,6 +19,8 @@ gem 'prawn'
 gem 'whenever', require: false
 gem 'pg'
 gem 'dotenv-rails'
+# gem 'ajax-datatables-rails','~> 0.3.1'
+gem 'new_ckeditor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'

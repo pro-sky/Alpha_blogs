@@ -15,4 +15,6 @@
 //= require jquery3
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require new_ckeditor/classic/ckeditor
+//= require ckeditor_config
 //= require_tree .

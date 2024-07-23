@@ -7,7 +7,7 @@
                     <div class="media">
                         <div class="media-body">
                             <h6 class="mt-0 font-weight-bold"><%= comment.user.username %></h6>
-                            <p><%= comment.content %></p>
+                            <p><%= simple_format(comment.content) %></p>
                             <div class="d-flex">
                                 <% if comment.user == current_user || current_user.admin? %>
                                 <%= link_to article_comment_path(@article, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "mr-2" do %>
@@ -34,7 +34,9 @@
         <% if current_user %>
             <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
             <div class="form-group">
-                <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "Add a comment..." %>
+                <div class="editor-section">
+                    <%= form.text_area :content, id: "editor", class: "form-control" %>
+                </div>
             </div>
             <%= form.submit "Post Comment", class: "btn btn-primary" %>
             <% end %>

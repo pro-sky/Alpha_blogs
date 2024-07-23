@@ -12,6 +12,7 @@
  *
  *= require_self
  *= require dataTables/jquery.dataTables
+ *= require new_ckeditor/ckeditor.css
  *= require_tree .
  
  
