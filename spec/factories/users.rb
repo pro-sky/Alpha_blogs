@@ -1,14 +1,10 @@
-# FactoryBot.define do
-#   factory :user do
-#     username { "testuser1" }
-#     email { "test1@example.com" }
-#     password { "password@123r" }
-#   end
-# end
 FactoryBot.define do
   factory :user do
     sequence(:username) { |n| "testuser#{n}" }
     sequence(:email) { |n| "test#{n}@example.com" }
     password { Faker::Internet.password(min_length: 8) }
+    admin { false }
+    reset_token { SecureRandom.urlsafe_base64 }
+    reset_sent_at { Time.now }
   end
 end
