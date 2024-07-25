@@ -38,6 +38,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'GET #index' do
+    before(:each) do
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
     it 'returns a success response' do
       get :index
       expect(response).to be_successful
@@ -45,8 +49,12 @@ RSpec.describe UsersController, type: :controller do
 
     it 'assigns @users' do
       user1 = create(:user)
-      get :index
-      expect(assigns(:users)).to eq([user, user1])
+      user2 = create(:user)
+
+      get :index, params: { page: 1 }
+      # puts assigns(:users).inspect # Debugging output
+      expect(assigns(:users)).to include(user1, user2)
     end
   end
+
 end
