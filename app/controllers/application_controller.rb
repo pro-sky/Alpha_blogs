@@ -1,11 +1,16 @@
 class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
   before_action :set_ability
+  before_action :load_recent_articles, if: :logged_in?
 
   private
 
   def set_ability
     @ability = Ability.new(current_user)
+  end
+
+  def load_recent_articles
+    @recent_articles = Article.order(created_at: :desc).limit(6)
   end
 
   # before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]

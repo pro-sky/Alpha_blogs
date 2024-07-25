@@ -1,0 +1,17 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title">Latest Articles</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <% @recent_articles.each do |article| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="article-title">
+                <%= link_to article.title, article_path(article), class: "text-decoration-none" %>
+            </div>
+            <%= link_to article_path(article), class: "text-decoration-none" do %>
+                <i class="fa fa-arrow-right"></i>
+            <% end %>
+        </li>
+        <% end %>
+    </ul>
+</div>

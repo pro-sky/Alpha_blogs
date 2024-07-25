@@ -27,6 +27,54 @@
   margin-right: 0 !important;
 }
 
+.main-section{
+  display: flex;
+}
+
+.main-content {
+  flex: 3;
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-title {
+  color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-width: 100%; /* Adjust based on your layout */
+}
+
+.list-group-item a {
+  color: #000;
+  text-decoration: none;
+}
+
+.list-group-item a:hover {
+  text-decoration: none;
+}
+
+.fa-arrow-right {
+  color: #000;
+}
+
+
 .jumbotron{
     background-image: asset-url('background.png');
     background-repeat: no-repeat;
