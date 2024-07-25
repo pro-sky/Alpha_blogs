@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
 end
 
 # Bootstrap
-gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'cancancan'
 gem 'pdfkit'
