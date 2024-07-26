@@ -1,37 +1,35 @@
-<h1 class="text-center">Edit article</h1>
 <div class="container">
-
- <div class="row justify-content-center">
- <div class="col-10">
- <%= render 'shared/errors',obj: @article %>
-  <%= form_with(model: @article,class: "shadow p-3 mb-3 bg-info rounded", local: true )  do |f| %>
-   <div class="form-group row">
-     <%= f.label :title ,class: "col-2 col-form-label text-light"%> 
-      <div class="col-10">
-      <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Title of article"%>
-      </div>
-    </div>
-  
-    <div class="form-group row">
-    <%= f.label :discription,class: "col-2 col-form-label text-light" %>
+  <h2 class="text-center">Edit article</h2>
+  <div class="row justify-content-center">
     <div class="col-10">
-    <%= f.text_area :discription, rows: 6,class: "form-control shadow rounded", placeholder: "Description of article" %> 
-    </div>
-     </div>
-     <div class="form-group row">
-     <%= f.label :category,class: "col-2 col-form-label text-light" %>
-     <div class="col-10">
-     <%= f.collection_select(:category_ids,Category.all, :id, :name,
-     {prompt: "make your selection form the list below(can be empty)"},{multiple: true,size: 3, class: "custom-select shadow rounded"}) %>
-     </div>
+      <%= render 'shared/errors',obj: @article %>
+      <%= form_with(model: @article,class: "shadow p-3 mb-3 bg-info rounded", local: true )  do |f| %>
+      <div class="form-group row">
+      <%= f.label :title ,class: "col-2 col-form-label text-light"%> 
+        <div class="col-10">
+        <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Title of article"%>
+        </div>
       </div>
-
-     <div class="form-group row justify-content-center">
-    <%= f.submit class: "btn btn-outline-light btn-lg" %> 
-     </div>
-     <% end %> 
+    
+      <div class="form-group row">
+        <%= f.label :discription,class: "col-2 col-form-label text-light" %>
+        <div class="col-10">
+          <%= f.ckeditor :discription, id: 'article-editor', class: "form-control shadow rounded" %> 
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :category,class: "col-2 col-form-label text-light" %>
+        <div class="col-10">
+          <%= f.collection_select(:category_ids,Category.all, :id, :name,
+          {prompt: "make your selection form the list below(can be empty)"},{multiple: true,size: 3, class: "custom-select shadow rounded"}) %>
+        </div>
+      </div>
+      <div class="form-group row justify-content-center">
+        <%= f.submit class: "btn btn-outline-light btn-lg" %> 
+      </div>
+      <% end %> 
+    </div>
+    <%= link_to 'Cancel and Return to listing page', articles_path %>
   </div>
-<%= link_to 'Cancel and Return to listing page', articles_path %>
-</div>
 </div>
 

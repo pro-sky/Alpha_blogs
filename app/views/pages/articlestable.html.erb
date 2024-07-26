@@ -19,10 +19,10 @@
         <td><%= blog.user.username %></td>
         <td><%= time_ago_in_words(blog.created_at )%> ago</td>
         <td>
-          <%= link_to 'View', article_path(blog) %>
+          <%= link_to 'View', article_path(blog),class: "text-dark" %>
           <% if logged_in? && (blog.user == current_user || current_user.admin?) %>
-          <%= link_to 'Edit', edit_article_path(blog) %>
-          <%= link_to 'Delete', article_path(blog), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_article_path(blog),class: "text-secondary" %>
+          <%= link_to 'Delete', article_path(blog), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" %>
           <% end%>
         </td>
       </tr>
