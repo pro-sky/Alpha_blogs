@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# ruby '2.4.3'
+ruby '2.7.2'
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -14,7 +14,7 @@ gem 'wkhtmltopdf-binary', '0.12.6'
 gem 'acts_as_paranoid'
 gem 'faraday'
 gem 'sidekiq'
-gem 'prawn'
+gem 'prawn', '~> 2.4'
 gem 'whenever', require: false
 gem 'pg'
 gem 'dotenv-rails'
