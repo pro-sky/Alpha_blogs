@@ -10,7 +10,7 @@ end
 gem 'jquery-rails'
 gem 'cancancan'
 gem 'pdfkit'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.12.6'
 gem 'acts_as_paranoid'
 gem 'faraday'
 gem 'sidekiq'
