@@ -17,12 +17,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(reset_token: params[:reset_token])
+    @user = User.find_by(reset_token: params[:id])
   end
 
   def update
     # @user = User.find_by(reset_token: params[:id])
-    @user = User.find_by(reset_token: params[:user][:reset_token])
+    @user = User.find_by(reset_token: params[:id])
     if @user.update(password: params[:user][:password])
       flash[:notice] = "password was updated successfully"
       redirect_to @user

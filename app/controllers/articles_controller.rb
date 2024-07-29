@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
   before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]
   # load_and_authorize_resource
   before_action :set_article, only: [:show, :edit, :update, :destroy, :download]
@@ -68,12 +69,15 @@ class ArticlesController < ApplicationController
 
           pdf.define_grid(columns: 5, rows: 8, gutter: 10)
           pdf.grid([0, 0], [1, 4]).bounding_box do
-              pdf.text @article.title, size: 30, style: :bold, align: :center
+              pdf.text @article.title, size: 20, style: :bold, align: :center
               pdf.move_down 20
           end
-
+          # pdf.grid([1,2], [0, 20]).bounding_box do
+          #   pdf.text "by " + @article.user.username, size: 8, style: :bold, align: :left
+          #   pdf.move_down 10
+          # end
           pdf.grid([2, 0], [7, 4]).bounding_box do
-          pdf.text @article.discription, size: 12, align: :justify
+          pdf.text strip_tags(@article.discription), size: 12, align: :justify
           end
           if params[:preview].present?
           send_data pdf.render, filename: 'post.pdf', type: 'application/pdf', disposition: 'inline'

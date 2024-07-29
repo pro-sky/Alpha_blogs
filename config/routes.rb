@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   post 'password/reset', to: 'password_resets#create'
   resources :password_resets, only: [:edit, :update]
   get '/password_resets/:id/edit', to: 'password_resets#edit'
-  # patch '/password_resets/:id', to: 'password_resets#update'
+  put '/password_resets/:id', to: 'password_resets#update', as: "update/password"
 
 
 end

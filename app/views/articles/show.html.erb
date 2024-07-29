@@ -11,7 +11,7 @@
                     <% end%>
                 </div>
                 <div class="card-body">
-                    <div class="card-text text-centre"><%= truncate(simple_format(@article.discription),length:80) %></div>
+                    <div class="card-text text-centre"><%= sanitize(truncate(simple_format(@article.discription),length: 90, escape: false)) %></div>
                     <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" if can? :update, @article %>
                     <%= link_to "Delete", article_path(@article), class: "btn btn-outline-danger" if can? :destroy, @article, method: :delete, data: {confirm: "Are you sure?"} %>
                     <%= link_to 'Download as PDF', download_article_path(@article, format: :pdf),class: "btn btn-outline-info", target: '_blank' %>

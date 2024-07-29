@@ -6,7 +6,7 @@ class Article < ApplicationRecord
     has_many :reactions, as: :reactionable, dependent: :destroy
     has_many :categories, through: :article_categories
     validates :title, presence: true, uniqueness: true,length: {minimum: 6,maximum:100}
-    validates :discription, presence: true,length: {minimum: 10,maximum:300}
+    validates :discription, presence: true,length: {minimum: 10,maximum:2000}
 
     def self.reset_view_counts
         update_all(view_count: 0)
