@@ -30,6 +30,8 @@
      </div>
      <% end %> 
   </div>
-<%= link_to 'Cancel and Return to listing page', articles_path %>
+  <% if logged_in? %>
+    <%= link_to 'Cancel and Return to Listing Page', articles_path, class: 'btn btn-outline-secondary text-dark' %>
+  <% end %>
 </div>
 </div>
