@@ -31,7 +31,8 @@ class ArticlesController < ApplicationController
       @article = Article.new(article_params)
       @article.user = current_user
       if @article.save
-          NotifyWorker.perform_async(@article.id)  if @article.persisted?
+        #   NotifyWorker.perform_async(@article.id)  if @article.persisted?
+          ArticleMailer.new_post_notification(@article.id).deliver_now if @article.persisted?
           flash[:notice] = "Article was created successfully"
           redirect_to @article
       else
