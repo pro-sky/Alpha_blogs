@@ -1,0 +1,10 @@
+<h1>Chat with <%= @receiver.username %></h1>
+
+<%= form_for [current_user, @direct_message] do |f| %>
+    <%= f.hidden_field :receiver_id, value: @receiver.id %>
+    <div class="form-group">
+        <%= f.label :message, "Message" %>
+        <%= f.text_area :message, class: 'form-control' %>
+    </div>
+    <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>

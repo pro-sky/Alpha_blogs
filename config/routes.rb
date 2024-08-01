@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:edit, :update]
   get '/password_resets/:id/edit', to: 'password_resets#edit'
   put '/password_resets/:id', to: 'password_resets#update', as: "update/password"
+  resources :users do
+    resources :direct_messages, only: [:index, :new, :create]
+  end
 
 
 end

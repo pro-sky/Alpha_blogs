@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery3
+//= require cable
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require_tree .

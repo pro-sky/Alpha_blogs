@@ -4,6 +4,8 @@ class User < ApplicationRecord
     has_many :articles, dependent: :destroy
     has_many :reactions, dependent: :destroy
     has_many :comments, dependent: :destroy
+    has_many :sent_messages, class_name: 'DirectMessage', foreign_key: 'sender_id'
+    has_many :received_messages, class_name: 'DirectMessage', foreign_key: 'receiver_id'
     validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 25 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true,
