@@ -38,6 +38,11 @@
           
         </div>
       </li>
+      <% if logged_in? %>
+        <li class="nav-item">
+          <%= link_to 'Chats', chats_path, class: 'nav-link' %>
+        </li>
+      <% end %>
 
 
 

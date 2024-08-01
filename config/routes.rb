@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :direct_messages, only: [:index, :new, :create]
   end
+  get 'chats', to: 'direct_messages#chats', as: 'chats'
 
 
 end

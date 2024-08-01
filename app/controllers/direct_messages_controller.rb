@@ -26,6 +26,12 @@ class DirectMessagesController < ApplicationController
     @direct_message = DirectMessage.new
   end
 
+  def chats
+    @users = User.joins("INNER JOIN direct_messages ON direct_messages.sender_id = users.id OR direct_messages.receiver_id = users.id")
+                  .where("direct_messages.sender_id = ? OR direct_messages.receiver_id = ?", current_user.id, current_user.id)
+                  .distinct
+  end
+
   private
 
   def direct_message_params
