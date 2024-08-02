@@ -35,11 +35,13 @@
         <div class="main-content">
           <%= yield %>
         </div>
-        <div class="sidebar">
-          <% if @recent_articles %>
-            <%= render 'articles/recent_articles' %>
-          <% end %>
-        </div>
+        <% if controller.controller_name == 'articles' %>
+          <div class="sidebar">
+            <% if @recent_articles %>
+              <%= render 'articles/recent_articles' %>
+            <% end %>
+          </div>
+        <% end %>
       <% else %>
         <%= yield %>
       <% end %>
