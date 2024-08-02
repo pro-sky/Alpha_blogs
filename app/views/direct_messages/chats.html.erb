@@ -1,18 +1,18 @@
-<div class="container">
-    <h3 class="my-2 text-center col-6">Chats</h3>
-    <div class="row">
-    <div class="list-group chat-list col-6 ml-2 pr-0">
-        <% @users.each do |user| %>
-            <%= link_to user_direct_messages_path(user_id: user.id), class: 'list-group-item list-group-item-action d-flex align-items-center' do %>
-                <div class="user-avatar">
-                    <%= image_tag('icons8-user-50.png', class: 'rounded-circle', alt: "#{user.username}'s avatar") %>
-                </div>
-                <div class="ml-3">
-                    <h5 class="mb-1"><%= user.username %></h5>
-                    <small>Last message preview...</small>
-                </div>
+<div class="container ">
+    <div class="row justify-content-center">
+        <h3 class="my-2 text-center  col-8">Chats</h3>
+        <div class="list-group chat-list col-8 ml-2 pr-0">
+            <% @users.each do |user| %>
+                <%= link_to user_direct_messages_path(user_id: user.id), class: 'list-group-item list-group-item-action d-flex align-items-center' do %>
+                    <div class="user-avatar">
+                        <%= image_tag('icons8-user-50.png', class: 'rounded-circle', alt: "#{user.username}'s avatar") %>
+                    </div>
+                    <div class="ml-3">
+                        <h5 class="mb-1"><%= user.username %></h5>
+                        <small>Last message preview...</small>
+                    </div>
+                <% end %>
             <% end %>
-        <% end %>
-    </div>
+        </div>
     </div>
 </div>

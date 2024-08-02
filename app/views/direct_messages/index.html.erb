@@ -12,7 +12,7 @@
                             <div class="media media-chat media-chat-reverse">
                             <div class="media-body">
                                 <p><%= message.message%></p>
-                                <p class="meta text-dark"><time datetime="2018"><%= time_ago_in_words(message.created_at) %></time></p>
+                                <p class="meta text-dark"><time datetime="2018"><%= time_ago_in_words(message.created_at) %> ago</time></p>
                             </div>
                             </div>
                         <% else %>
@@ -20,7 +20,7 @@
                                 <%= image_tag 'icons8-user-50.png', class: "avatar", alt: 'user' %>
                                 <div class="media-body">
                                     <p><%= message.message%></p>
-                                    <p class="meta"><time datetime="2018"><%= time_ago_in_words(message.created_at) %></time></p>
+                                    <p class="meta"><time datetime="2018"><%= time_ago_in_words(message.created_at) %> ago</time></p>
                                 </div>
                             </div>
                         <% end %>
