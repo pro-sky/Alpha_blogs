@@ -3,7 +3,9 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:index,:edit,:update,:destroy,:show]
   # load_and_authorize_resource
   before_action :set_article, only: [:show, :edit, :update, :destroy, :download]
-  before_action :require_user, except: [:show, :index]
+  before_action :set_user_reaction, except: [:show, :index]
+  before_action :set_user_reaction, only: [:show]
+
   # before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
@@ -96,6 +98,10 @@ class ArticlesController < ApplicationController
 
   def set_article
   @article = Article.find(params[:id])
+  end
+
+  def set_user_reaction
+    @user_reaction = @article.reactions.find_by(user: current_user)
   end
 
   def article_params

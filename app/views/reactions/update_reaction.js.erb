@@ -1,15 +1,1 @@
-<% if @reactionable.is_a?(Article) %>
-    document.querySelector('.like-count-<%= @reactionable.id %>').innerHTML = '<%= @reactionable.like_count %>';
-    <% if current_user.reacted_to?(@reactionable) %>
-        document.querySelector('.article-reaction-link-<%= @reactionable.id %>').outerHTML = '<%= j render(partial: "reactions/unlike_button", locals: { reactionable: @reactionable }) %>';
-    <% else %>
-        document.querySelector('.article-reaction-link-<%= @reactionable.id %>').outerHTML = '<%= j render(partial: "reactions/like_button", locals: { reactionable: @reactionable }) %>';
-    <% end %>
-<% elsif @reactionable.is_a?(Comment) %>
-    document.querySelector('.like-count-<%= @reactionable.id %>').innerHTML = '<%= @reactionable.like_count %>';
-    <% if current_user.reacted_to?(@reactionable) %>
-        document.querySelector('.comment-reaction-link-<%= @reactionable.id %>').outerHTML = '<%= j render(partial: "reactions/unlike_button", locals: { reactionable: @reactionable }) %>';
-    <% else %>
-        document.querySelector('.comment-reaction-link-<%= @reactionable.id %>').outerHTML = '<%= j render(partial: "reactions/like_button", locals: { reactionable: @reactionable }) %>';
-    <% end %>
-<% end %>
+<%= update_reaction_js(@reactionable, @user_reaction) %>

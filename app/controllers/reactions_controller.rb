@@ -12,13 +12,14 @@ class ReactionsController < ApplicationController
       @reaction = @reactionable.reactions.build(user: current_user)
       if @reaction.save
         @reactionable.increment!(:like_count)
+        set_user_reaction
         respond_to do |format|
-          format.html { redirect_back fallback_location: root_path, notice: "Reaction added." }
+          format.html
           format.js { render :update_reaction }
         end
       else
         respond_to do |format|
-          format.html { redirect_back fallback_location: root_path, alert: "Unable to add reaction." }
+          format.html
           format.js { render json: { error: "Unable to add reaction." }, status: :unprocessable_entity }
         end
       end
@@ -30,12 +31,12 @@ class ReactionsController < ApplicationController
     if @reaction && @reaction.destroy
       @reactionable.decrement!(:like_count)
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, notice: "Reaction removed." }
+        format.html
         format.js { render :update_reaction }
       end
     else
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, alert: "Unable to remove reaction." }
+        format.html
         format.js { render json: { error: "Unable to remove reaction." }, status: :unprocessable_entity }
       end
     end
@@ -45,6 +46,10 @@ class ReactionsController < ApplicationController
 
   def set_reactionable
     @reactionable = find_reactionable
+  end
+
+  def set_user_reaction
+    @user_reaction = @reactionable.reactions.find_by(user: current_user)
   end
 
   def find_reactionable
