@@ -20,4 +20,8 @@ class User < ApplicationRecord
         self.reset_token = SecureRandom.urlsafe_base64
         self.reset_sent_at = Time.now
     end
+
+    def reacted_to?(reactionable)
+        reactions.exists?(reactionable: reactionable)
+    end
 end
