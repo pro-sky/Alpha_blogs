@@ -1,0 +1,3 @@
+<%= link_to polymorphic_path([reactionable, user_reaction]), method: :delete, remote: true, class: "#{reactionable.class.name.downcase}-reaction-link-#{reactionable.id}" do %>
+    <%= image_tag 'thumb_down.svg', width: '20px', height: '20px', alt: 'Unlike' %>
+<% end %>

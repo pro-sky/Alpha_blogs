@@ -1,8 +1,8 @@
 
 <div class="container">
-    <h2 class="text-center mt-4"><%= @article.title%></h2>
+    <h3 class="text-center mt-4"><%= @article.title%></h3>
     <div class="row justify-content-md-center">
-        <div class="col-8 mt-4">
+        <div class="col-9 mt-4">
             <div class="card text-center shadow  mb-5 bg-white rounded">
                 <div class="card-header font-italic">
                         by <%= link_to @article.user.username , user_path(@article.user)%>
@@ -16,17 +16,17 @@
                     <%= link_to "Delete", article_path(@article), class: "btn btn-outline-danger" if can? :destroy, @article, method: :delete, data: {confirm: "Are you sure?"} %>
                     <%= link_to 'Download as PDF', download_article_path(@article, format: :pdf),class: "btn btn-outline-info", target: '_blank' %>
                     <%= link_to 'Preview', download_article_path(@article, format: :pdf, preview: true),class: "btn btn-outline-info", target: '_blank' %>
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-md-end">
                         <% if @article.reactions.where(user: current_user).exists? %>
-                        <%= link_to article_reaction_path(@article, @article.reactions.find_by(user: current_user)), method: :delete, class: "" do %>
-                            <%= image_tag 'thumb_down.svg', width: '20px', height: '20px', alt: 'Unlike' %>
-                        <% end %>
+                            <%= link_to article_reaction_path(@article, @user_reaction), method: :delete, remote: true, class: "article-reaction-link-#{@article.id}" do %>
+                                <%= image_tag 'thumb_down.svg', width: '20px', height: '20px', alt: 'Unlike' %>
+                            <% end %>
                         <% else %>
-                            <%= link_to article_reactions_path(@article), method: :post, class: "" do %>
-                            <%= image_tag 'thumb_up.svg', width: '20px', height: '20px', alt: 'Like' %>
+                            <%= link_to article_reactions_path(@article), method: :post, remote: true, class: "article-reaction-link-#{@article.id}" do %>
+                                <%= image_tag 'thumb_up.svg', width: '20px', height: '20px', alt: 'Like' %>
                             <% end %>
                         <% end %>
-                        <span class="ml-2"><%= @article.like_count %></span>
+                        <span class="ml-2 like-count-<%= @article.id %>"><%= @article.like_count %></span>
                     </div>
                 </div>
                 <div class="card-footer text-muted">

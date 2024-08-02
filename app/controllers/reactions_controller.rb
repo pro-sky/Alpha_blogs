@@ -1,17 +1,27 @@
 class ReactionsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_reactionable
 
   def create
     if @reactionable.reactions.where(user: current_user).exists?
-      redirect_back fallback_location: root_path, alert: "You have already reacted to this."
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path, alert: "You have already reacted to this." }
+        format.js { render json: { error: "You have already reacted to this." }, status: :unprocessable_entity }
+      end
     else
       @reaction = @reactionable.reactions.build(user: current_user)
       if @reaction.save
         @reactionable.increment!(:like_count)
-        redirect_back fallback_location: root_path, notice: "Reaction added."
+        set_user_reaction
+        respond_to do |format|
+          format.html
+          format.js { render :update_reaction }
+        end
       else
-        redirect_back fallback_location: root_path, alert: "Unable to add reaction."
+        respond_to do |format|
+          format.html
+          format.js { render json: { error: "Unable to add reaction." }, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -20,9 +30,15 @@ class ReactionsController < ApplicationController
     @reaction = @reactionable.reactions.find_by(user: current_user)
     if @reaction && @reaction.destroy
       @reactionable.decrement!(:like_count)
-      redirect_back fallback_location: root_path, notice: "Reaction removed."
+      respond_to do |format|
+        format.html
+        format.js { render :update_reaction }
+      end
     else
-      redirect_back fallback_location: root_path, alert: "Unable to remove reaction."
+      respond_to do |format|
+        format.html
+        format.js { render json: { error: "Unable to remove reaction." }, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -30,6 +46,10 @@ class ReactionsController < ApplicationController
 
   def set_reactionable
     @reactionable = find_reactionable
+  end
+
+  def set_user_reaction
+    @user_reaction = @reactionable.reactions.find_by(user: current_user)
   end
 
   def find_reactionable

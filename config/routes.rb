@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   get 'articlestable', to: 'pages#articlestable'
   get 'external_articles', to: 'articles#external'
   resources :articles do
-    resources :reactions, only: [:create, :destroy], as: :reactions
+    resources :reactions, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
     member do
       get 'download'
     end
   end
   resources :comments do
-    resources :reactions, only: [:create, :destroy], as: :reactions
+    resources :reactions, only: [:create, :destroy]
   end
   get 'signup', to: 'users#new'
   get 'userlist', to: 'users#userlist'
