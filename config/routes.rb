@@ -33,6 +33,6 @@ Rails.application.routes.draw do
     resources :direct_messages, only: [:index, :new, :create]
   end
   get 'chats', to: 'direct_messages#chats', as: 'chats'
-
+  post 'send_email', to: 'emails#send_email'
 
 end

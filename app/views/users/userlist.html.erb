@@ -1,8 +1,4 @@
-User list
-
-<h3 class="text-center mt-3">Listing article in table form</h3>
-
-
+<h3 class="text-center mt-3">Listing User in table form</h3>
 <table id="userTable" class="table table-bordered">
   <thead class="thead-dark">
     <tr>
@@ -15,9 +11,7 @@ User list
     <% @users.each_with_index do |user,index| %>
       <tr>
         <td><%= @users.offset + index + 1 %></td>
-        
         <td><%= user.username %></td>
-       
         <td>
           <%= link_to 'View', user_path(user) %>
           <% if logged_in? && (user == current_user || current_user.admin?) %>
